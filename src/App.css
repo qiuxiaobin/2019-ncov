@@ -14,7 +14,7 @@
   font-size: 1.2rem;
   font-weight: 600;
   color: #f60;
-  margin: .5rem 0;
+  margin: 0.2rem 0;
   display: block;
 }
 
@@ -25,10 +25,11 @@
 
 .new-date {
   color: #888;
+  margin:0.25rem 0;
 }
 
 .new-date > .relative {
-  color: #000;
+  /* color: #000; */
   font-weight: 600;
   display: inline-block;
   padding-right: 1rem;
@@ -135,4 +136,9 @@ h2 small {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+}
+.more{
+  text-align: center;
+  color: #666;
+  padding-top:10px;
 }

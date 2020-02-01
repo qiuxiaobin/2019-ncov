@@ -6,6 +6,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 
 import all from './data/overall'
 import provinces from './data/area'
+import countries from './data/countries'
 
 import Tag from './Tag'
 
@@ -26,13 +27,13 @@ const fetcher = (url) => axios(url).then(data => {
 function New ({ title, summary, sourceUrl, pubDate, pubDateStr }) {
   return (
     <div className="new">
+      <a className="title" href={sourceUrl}>{ title }</a>
       <div className="new-date">
         <div className="relative">
           {dayjs(pubDate).locale('zh-cn').fromNow()}
         </div>
         {dayjs(pubDate).format('YYYY-MM-DD HH:mm')}
       </div>
-      <a className="title" href={sourceUrl}>{ title }</a>
       <div className="summary">{ summary.slice(0, 100) }...</div>
     </div>
   )
@@ -57,26 +58,11 @@ function News ({ province }) {
           .slice(0, len)
           .map(n => <New {...n} key={n.id} />)
       }
-      <div className="more" onClick={() => { setLen() }}>点击查看全部动态</div>
+      <div className="more" onClick={() => { setLen() }}>点击查看全部动态>></div>
     </div>
   )
 }
 
-function Summary () {
-  return (
-    <div className="card info">
-      <h2>信息汇总</h2>
-      <li>
-        <a href="https://m.yangshipin.cn/static/2020/c0126.html">疫情24小时 | 与疫情赛跑</a>
-      </li>
-      <li><a href="http://2019ncov.nosugartech.com/">确诊患者同行查询工具</a></li>
-      <li><a href="https://news.qq.com/zt2020/page/feiyan.htm">腾讯新闻新冠疫情实时动态</a></li>
-      <li><a href="https://3g.dxy.cn/newh5/view/pneumonia">丁香园新冠疫情实时动态</a></li>
-      <li><a href="https://vp.fact.qq.com/home">新型冠状病毒实时辟谣</a></li>
-      <li><a href="https://promo.guahao.com/topic/pneumonia">微医抗击疫情实时救助</a></li>
-    </div>
-  )
-}
 
 function Stat ({ modifyTime, confirmedCount, suspectedCount, deadCount, curedCount, name }) {
   return (
@@ -105,15 +91,6 @@ function Stat ({ modifyTime, confirmedCount, suspectedCount, deadCount, curedCou
   )
 }
 
-function Fallback () {
-  return (
-    <div className="fallback">
-      <div>
-        代码仓库: <a href="https://github.com/shfshanyue/2019-ncov">shfshanyue/2019-ncov</a>
-      </div>
-    </div>
-  )
-}
 
 function Area ({ area, onChange }) {
   const renderArea = () => {
@@ -133,9 +110,8 @@ function Area ({ area, onChange }) {
       </div>
     ))
   }
-
   return (
-    <>
+    <div>
       <div className="province header">
         <div className="area">地区</div>
         <div className="confirmed">确诊</div>
@@ -143,7 +119,8 @@ function Area ({ area, onChange }) {
         <div className="cured">治愈</div>
       </div>
       { renderArea() }
-    </>
+
+    </div>
   )
 }
 
@@ -151,11 +128,11 @@ function Header ({ province }) {
   return (
     <header>
       <h1>
-        <small>新型冠状病毒</small>
+        <small>武汉加油，中国加油</small>
         <br />
-        疫情实时动态 · { province ? province.name : '省市地图' }
+        <small>肺炎疫情实时动态</small>
       </h1>
-      <i>By 山月 (数据来源于丁香园)</i>
+      {/* <i>数据来源于丁香园</i> */}
     </header>
   )
 }
@@ -219,15 +196,14 @@ function App () {
           {
             province ? false :
               <div className="tip">
-                在地图中点击省份可跳转到相应省份的疫情地图，并查看该省相关的实时动态
+                点击地图中的省份可查看相应数据和动态
               </div>
           }
         </Suspense>
         <Area area={area} onChange={setProvince} />
       </div>
       <News province={province} />
-      <Summary />
-      <Fallback />
+      {/* <Summary /> */}
     </div>
   );
 }

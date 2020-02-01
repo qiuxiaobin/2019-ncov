@@ -43,5 +43,12 @@ h2 {
 .card {
   background-color: #fff;
   padding: 1rem;
-  margin: 10px 0;
+  margin-top: 10px;
 }
+/* .echarts-for-react{
+  height: 500px!important;
+  overflow: auto;
+}
+.echarts-for-react canvas{
+  width: 130%!important;
+} */

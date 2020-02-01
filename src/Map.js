@@ -37,9 +37,9 @@ function Map ({ province, data, onClick }) {
         padding: 5,
         // "inverse": false,
         // "splitNumber": 5,
-        orient: province ? 'horizontal' : 'vertical',
-        showLabel: province ? false : true,
-        text: ['高', '低'],
+        orient: province ? 'vertical' : 'vertical',
+        showLabel: province ? true : true,
+        // text: ['高', '低'],
         itemWidth: 10,
         itemHeight: 10,
         textStyle: {
@@ -59,6 +59,10 @@ function Map ({ province, data, onClick }) {
           position: 'inside',
           // margin: 8,
           fontSize: 6
+        },
+        legend:{
+          width:'auto',
+          height:'500px'
         },
         mapType: province ? province.name : 'china',
         data,
